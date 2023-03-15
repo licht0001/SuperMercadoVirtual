@@ -1,0 +1,33 @@
+﻿@using Microsoft.AspNetCore.Http;  <!-- para GetInt32 de sesion -->
+@using SuperMercadoVirtual.Models;  <!-- para Objeto a Producto -->
+@using SuperMercadoVirtual.Herramientas;   <!-- Uso de nuestro Conversor -->
+
+<h3>Productos Disponibles</h3>
+<table class="table table-hover">
+    <tr>
+        <td colspan="4" align="right"></td>
+        <td align="right">
+            <a asp-controller="Carrito" asp-action="Index">Ver Carrito</a>
+        </td>
+    </tr>
+    <tr>
+        <th align="center">ID</th>
+        <th align ="center">Nombre</th>
+        <th align ="center">Precio</th>
+        <th align ="center">Imagen</th>
+        <th align="right">Acción</th>
+    </tr>
+    @foreach (var producto in ViewBag.productos)
+    {
+        <tr>
+            <td>@producto.Id</td>
+            <td>@producto.Nombre</td>
+            <td>@producto.Precio</td>
+            <td><img src="~/imagenes/@producto.Imagen" height="90" width="90"></td>
+            <td align="left">
+                <a asp-controller="Carrito" asp-action="Agregar" asp-route-id="@producto.Id">Comprar Ahora</a>
+            </td>
+        </tr>
+      }
+</table>
+

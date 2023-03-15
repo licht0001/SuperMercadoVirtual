@@ -1,0 +1,43 @@
+﻿@using Microsoft.AspNetCore.Http;  <!-- para GetInt32 de sesion -->
+@using SuperMercadoVirtual.Models;  <!-- para Objeto a Producto -->
+@using SuperMercadoVirtual.Herramientas;   <!-- Uso de nuestro Conversor -->
+
+<h3>Contenido del Carrito</h3>
+<table class="table table-success table-striped">
+    <tr>
+        <th>Nombre</th>
+        <th>Imagen</th>
+        <th>Precio</th>
+        <th>Cantidad</th>
+        <th>Acción</th>
+        <th>Subtotal</th>
+    </tr>
+    @foreach (var Elemento in ViewBag.carrito)
+    {
+        <tr>
+            <td>@Elemento.Producto.Nombre</td>
+            <td><img src="~/imagenes/@Elemento.Producto.Imagen" height="90" width="90"></td>
+            <td>@Elemento.Producto.Precio</td>
+            <td>@Elemento.Cantidad</td>
+            <td><a asp-controller="carrito" asp-action="Restar" asp-route-id="@Elemento.Producto.Id">Eliminar Uno</a></td>
+            <td align="center">@(Elemento.Producto.Precio * Elemento.Cantidad)</td>
+
+        </tr>
+    }
+    <tr>
+        <td colspan="4"</td>
+        <td align="center">Total:</td>  
+        <td align="center"> @ViewBag.Total</td>
+    </tr>
+    <tr>
+    <td colspan="4"</td>
+    <td align="center">
+            <a asp-controller="ProductoParaCarrito" asp-action="Index"> Volver atrás</a>
+    </td>
+    <td align="center">
+            <a asp-controller="FinalizarCompra" asp-action="Index"> Finalizar Compra</a>
+            
+    </td>
+    </tr>
+</table>
+

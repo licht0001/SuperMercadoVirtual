@@ -1,0 +1,14 @@
+﻿<FONT FACE="impact" SIZE=4 COLOR="blue">
+    Compra Exitosa
+</FONT>
+<table>
+    <tr>
+        <td align="right" SIZE=5>Compra realizada, se le descontó <strong>Bs.</strong></td>
+        <td align="left" SIZE=5><strong>@ViewBag.Total</strong></td>
+    </tr>
+</table>
+
+<h6>Gracias por su Compra...</h6>
+
+<a asp-controller="ProductoParaCarrito" asp-action="Index">Realizar mas Compras</a>
+<a asp-controller="Carrito" asp-action="EliminarTodo">Vaciar Carrito</a>

@@ -1,0 +1,43 @@
+﻿@using Microsoft.AspNetCore.Http;  <!-- para GetInt32 de sesion -->
+@using SuperMercadoVirtual.Models;  <!-- para Objeto a Producto -->
+@using SuperMercadoVirtual.Herramientas;   <!-- Uso de nuestro Conversor -->
+
+<h3>Mostrando valores de sesión</h3>
+<h4>Valores primitivos</h4>
+Edad: @Context.Session.GetInt32("edad")
+<br>
+Usuario: @Context.Session.GetInt32("usuario")
+<br>
+
+<h4>Un Producto</h4>
+@{
+    Producto producto = ConversorParaSesion.JsonAObjeto<Producto>(Context.Session, "producto");
+}
+Id: @producto.Id<br>
+Nombre: @producto.Nombre<br>
+Precio: @producto.Precio<br>
+Imagen: @producto.Imagen<br>
+<br>
+
+<h4>Varios Productos</h4>
+@{
+    List<Producto> productos = ConversorParaSesion.JsonAObjeto<List<Producto>>(Context.Session, "productos");
+}
+<table>
+    <tr>
+        <th>ID</th>
+        <th>Nombre</th>
+        <th>Precio</th>
+        <th>Imagen</th>
+        <th>Cantidad</th>
+    </tr>
+    @foreach (var p in productos)
+    {
+        <tr>
+            <td>@p.Id</td>
+            <td>@p.Nombre</td>
+            <td>@p.Precio</td>
+            <td>@p.Imagen</td>
+        </tr>
+    }
+</table>
